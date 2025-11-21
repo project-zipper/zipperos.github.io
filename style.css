@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   background: linear-gradient(135deg, #0f001a, #1a0033, #2b0055);
   color: #e6e6e6;
   padding: 20px;
@@ -48,6 +48,11 @@ nav a {
   transition: 0.2s ease;
 }
 
+nav a.active {
+  color: #ffffff;
+  text-shadow: 0 0 15px #bb77ff;
+}
+
 nav a:hover {
   color: #ffffff;
   text-shadow: 0 0 10px #bb77ff;
@@ -56,19 +61,16 @@ nav a:hover {
 /* --------------------------------------------------
    SECTIONS + GLASS PANELS
 -------------------------------------------------- */
-.section {
-  margin: 30px auto;
-  padding: 25px;
-  max-width: 900px;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(18px);
-  border-radius: 18px;
-  padding: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  box-shadow: 0 0 25px rgba(160, 0, 255, 0.25);
+.section, .content-box, .glass {
+    display: block;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 900px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    box-shadow: 0 0 25px rgba(160, 0, 255, 0.25);
 }
 
 /* Fade-in animation */
@@ -89,31 +91,43 @@ nav a:hover {
   font-size: 40px;
   color: #d9a6ff;
   text-shadow: 0 0 15px #9c3cff;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .subtitle {
   font-size: 28px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: #eacaff;
   text-shadow: 0 0 12px #b060ff;
 }
 
 /* Paragraphs */
 p {
-  line-height: 1.6;
+  line-height: 1.8;
   font-size: 18px;
+  margin-bottom: 20px;
 }
 
 /* Lists */
-.feature-list {
-  margin-top: 10px;
-  padding-left: 22px;
+ul, ol {
+  padding-left: 25px;
+  margin-bottom: 20px;
 }
 
-.feature-list li {
-  margin-bottom: 8px;
+li {
+  margin-bottom: 10px;
   font-size: 18px;
+}
+
+/* Headings */
+h1, h2, h3 {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/* Last-child spacing fix */
+.section > :last-child {
+    margin-bottom: 0;
 }
 
 /* --------------------------------------------------
@@ -127,6 +141,11 @@ p {
   border-radius: 10px;
   text-decoration: none;
   transition: 0.25s;
+  margin-top: 15px;
+}
+
+.btn + .btn {
+    margin-left: 15px; /* space between consecutive buttons */
 }
 
 .btn-download {
@@ -139,6 +158,30 @@ p {
   transform: translateY(-2px);
 }
 
+/* Secondary buttons (Discord, Fandom, etc.) */
+.btn.secondary {
+  background: rgba(120, 0, 255, 0.3);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(180, 0, 255, 0.5);
+}
+
+.btn.secondary:hover {
+  box-shadow: 0 0 20px rgba(200, 0, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+/* Glow buttons (Zeta page or special callouts) */
+.btn.glow {
+  background: linear-gradient(135deg, #bb77ff, #e0a6ff);
+  box-shadow: 0 0 25px rgba(187, 119, 255, 0.6);
+  color: white;
+}
+
+.btn.glow:hover {
+  box-shadow: 0 0 35px rgba(187, 119, 255, 0.9);
+  transform: translateY(-2px);
+}
+
 /* --------------------------------------------------
    SPECIAL HIGHLIGHT BOX
 -------------------------------------------------- */
@@ -148,6 +191,7 @@ p {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(14px);
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 /* Glow box */
@@ -164,4 +208,15 @@ p {
   padding: 20px;
   color: #caa7ff;
   opacity: 0.8;
+}
+
+/* --------------------------------------------------
+   IMAGE STYLING
+-------------------------------------------------- */
+.screenshot {
+  max-width: 100%;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 18px rgba(185, 120, 255, 0.3);
+  opacity: 0.63;
 }
