@@ -220,3 +220,37 @@ h1, h2, h3 {
   box-shadow: 0 0 18px rgba(185, 120, 255, 0.3);
   opacity: 0.63;
 }
+/* Floating images container */
+.float-image-container {
+  position: relative;       /* needed for overlay text */
+  display: inline-block;
+  margin-bottom: 20px;
+  animation: float 4s ease-in-out infinite;  /* floating animation */
+}
+
+.float-image-container img {
+  max-width: 100%;
+  border-radius: 14px;
+  opacity: 0.85;           /* slightly transparent */
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Floating keyframes */
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-15px); }  /* floats up */
+  100% { transform: translateY(0px); }
+}
+
+/* Overlay text */
+.float-image-container .overlay-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 12px #bb77ff, 0 0 20px #d6a6ff;
+  pointer-events: none;  /* so clicks go through */
+}
+
