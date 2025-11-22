@@ -50,9 +50,9 @@
 
 <section class="community">
   <h2>Chat with IntelliZip</h2>
-  <div id="chat" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; max-height: 400px; overflow-y: auto;"></div>
-  <div style="margin-top: 15px;">
-    <input id="userInput" type="text" placeholder="Type your question..." style="width: 70%; padding: 10px; border-radius: 8px; border: none;">
+  <div id="chat" style="display:flex; flex-direction:column; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; max-height: 400px; overflow-y: auto;"></div>
+  <div style="margin-top: 15px; display:flex; gap:10px;">
+    <input id="userInput" type="text" placeholder="Type your question..." style="flex:1; padding: 10px; border-radius: 8px; border: none;">
     <button class="btn glow" onclick="sendInput()">Send</button>
   </div>
 </section>
@@ -64,7 +64,7 @@
 <script>
 const chatDiv = document.getElementById('chat');
 
-// Display message
+// Display a message in the chat
 function addMessage(text, sender) {
   const msg = document.createElement('div');
   msg.classList.add(sender);
@@ -72,6 +72,7 @@ function addMessage(text, sender) {
   msg.style.borderRadius = '10px';
   msg.style.marginBottom = '10px';
   msg.style.maxWidth = '80%';
+  msg.style.wordWrap = 'break-word';
   msg.textContent = text;
   if(sender === 'user') {
     msg.style.background = 'rgba(255,255,255,0.4)';
@@ -86,27 +87,27 @@ function addMessage(text, sender) {
   chatDiv.scrollTop = chatDiv.scrollHeight;
 }
 
-// Send suggestion button / input
+// Send a prompt to the backend AI
 async function sendPrompt(prompt) {
   addMessage(prompt, 'user');
-  addMessage('...', 'ai'); // placeholder while fetching
+  addMessage('...', 'ai');
 
   try {
-    const response = await fetch('/ai', { // <-- call local backend
+    const response = await fetch('/ai', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ prompt })
     });
+
     const data = await response.json();
-    const aiText = data?.candidates?.[0]?.output || "Sorry, I couldn't generate a response.";
-    chatDiv.querySelector('.ai:last-child').textContent = aiText;
-  } catch(err) {
+    chatDiv.querySelector('.ai:last-child').textContent = data.output;
+  } catch (err) {
     chatDiv.querySelector('.ai:last-child').textContent = "Error connecting to IntelliZip.";
     console.error(err);
   }
 }
 
-// Send input from textbox
+// Send input from the text box
 function sendInput() {
   const input = document.getElementById('userInput');
   if(input.value.trim() === '') return;
@@ -128,7 +129,7 @@ function sendInput() {
     .float-image-container img { margin: 0 auto; }
   }
   @media (max-width: 600px) {
-    .button-row, #suggestions { display: flex; flex-direction: column; }
+    .button-row, #suggestions { display: flex; flex-direction: column; gap:10px; }
     .button-row a.btn, #suggestions button { margin-left: 0; margin-top: 12px; }
   }
 </style>
