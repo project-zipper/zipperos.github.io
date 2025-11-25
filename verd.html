@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desktop Environments</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 50px;
+  }
+
+  .desktop-container {
+    display: inline-block;
+    margin: 20px;
+  }
+
+  .floating-img {
+    width: 200px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background-color: #005fa3;
+  }
+</style>
+</head>
+<body>
+
+<h1>Download Desktop Environments</h1>
+
+<div class="desktop-container">
+  <img src="gnome.png" alt="Gnome" class="floating-img">
+  <br>
+  <button onclick="forceDownload('https://example.com/gnome.png', 'gnome.png')">Download Gnome</button>
+</div>
+
+<div class="desktop-container">
+  <img src="kde.png" alt="KDE" class="floating-img">
+  <br>
+  <button onclick="forceDownload('htpps://example.com/kde.png', 'kde.png')">Download KDE</button>
+</div>
+
+<div class="desktop-container">
+  <img src="cinnamon.png" alt="Cinnamon" class="floating-img">
+  <br>
+  <button onclick="forceDownload('https://example.com/cinnamon.png', 'cinnamon.png')">Download Cinnamon</button>
+</div>
+
+<script>
+async function forceDownload(url, filename) {
+    try {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (err) {
+        alert('Download failed: ' + err);
+    }
+}
+</script>
+
+</body>
+</html>
